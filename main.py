@@ -1,6 +1,3 @@
-# main.py
-# main.py
-
 import os
 import numpy as np
 from preprocessing import load_images_from_folder, preprocess_images, encode_labels
