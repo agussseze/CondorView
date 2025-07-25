@@ -59,6 +59,6 @@ Para mas informacion de los integrantes visitar nuestra landing page [https://te
 ___________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________
 
 ![Sin título-1](https://github.com/user-attachments/assets/1628539f-ef1a-47e3-9e6f-19fd8d35a884)
-![Condor View](assets/CondorView_Vector_REAL.png)
+
 
 
