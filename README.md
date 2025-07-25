@@ -27,12 +27,12 @@ ________________________________________________________________________________
 
 Instalación
 
-1.Clonar el repositorio:
+1. Clonar el repositorio:
 
 git clone https://github.com/tu_usuario/CondorView.git
 cd CondorView
 
-2.Crear y activar un entorno virtual:
+2. Crear y activar un entorno virtual:
 
 python -m venv venv
 .\venv\Scripts\Activate.ps1   
