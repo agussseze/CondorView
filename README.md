@@ -55,6 +55,7 @@ En desarrollo: ya se completó la parte de configuración y preprocesamiento. Ac
 ___________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________
 
 Contacto
+
 Mail [tecesp.eu@gmail.com]
 
 Para mas información, visitar nuestra landing page [https://tecesp.vercel.app]
