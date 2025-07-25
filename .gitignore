@@ -1,0 +1,13 @@
+# .gitignore
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.env
+*.h5
+*.ckpt
+.DS_Store
+.ipynb_checkpoints/
+outputs/
+logs/
+data/
