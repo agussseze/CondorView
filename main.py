@@ -18,8 +18,7 @@ with open("config.yaml", "r") as file:
 
 images = np.load(os.path.join(config["paths"]["output_dir"], "preprocessed_images.npy"))
 
-# Para este ejemplo usaremos etiquetas dummy (falsas)
-# En un caso real, debes cargarlas desde un archivo anotado con clases (por ejemplo, incendios, inundaciones, etc.)
+# Asegurarse de que las imágenes tengan la forma correcta
 labels = np.random.randint(0, 2, len(images))  
 labels = to_categorical(labels, num_classes=2)
 
