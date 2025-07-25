@@ -1,64 +1,37 @@
+# main.py
+# main.py
+
 import os
-import yaml
 import numpy as np
-from preprocessing import load_and_preprocess_images
-from tensorflow.keras.models import Sequential
-from tensorflow.keras.layers import Conv2D, MaxPooling2D, Flatten, Dense, Dropout
-from tensorflow.keras.utils import to_categorical
-from sklearn.model_selection import train_test_split
+from preprocessing import load_images_from_folder, preprocess_images, encode_labels
+from models.dummy_model import DummyModel
+import yaml
 
+# Cargar configuración desde config.yaml
+with open("config/config.yaml", "r") as f:
+    config = yaml.safe_load(f)
 
-# 1. Cargar configuración
+data_path = config["data_path"]
+img_height = config["img_height"]
+img_width = config["img_width"]
 
-with open("config.yaml", "r") as file:
-    config = yaml.safe_load(file)
+# Cargar imágenes y etiquetas
+print("Cargando imágenes...")
+images, labels = load_images_from_folder(data_path, img_height, img_width)
+images = preprocess_images(images)
+labels_encoded, class_names = encode_labels(labels)
 
+# Cargar modelo dummy
+model = DummyModel()
 
-# 2. Cargar imágenes preprocesadas
+# Hacer predicciones
+print("Realizando predicciones...\n")
+predictions = model.predict(images)
 
-images = np.load(os.path.join(config["paths"]["output_dir"], "preprocessed_images.npy"))
-
-# Asegurarse de que las imágenes tengan la forma correcta
-labels = np.random.randint(0, 2, len(images))  
-labels = to_categorical(labels, num_classes=2)
-
-
-# 3. Dividir en entrenamiento y prueba
-
-X_train, X_test, y_train, y_test = train_test_split(
-    images, labels, test_size=0.2, random_state=config["train"]["random_seed"]
-)
-
-
-# 4. Definir el modelo CNN
-
-model = Sequential([
-    Conv2D(32, (3, 3), activation='relu', input_shape=(
-        config["preprocessing"]["img_height"], config["preprocessing"]["img_width"], 3)),
-    MaxPooling2D(pool_size=(2, 2)),
-    Conv2D(64, (3, 3), activation='relu'),
-    MaxPooling2D(pool_size=(2, 2)),
-    Flatten(),
-    Dense(128, activation='relu'),
-    Dropout(0.5),
-    Dense(2, activation='softmax')  
-])
-
-model.compile(optimizer='adam', loss='categorical_crossentropy', metrics=['accuracy'])
-
-
-# 5. Entrenar el modelo
-
-model.fit(
-    X_train, y_train,
-    validation_data=(X_test, y_test),
-    epochs=config["train"]["epochs"],
-    batch_size=config["train"]["batch_size"]
-)
-
-
-# 6. Guardar el modelo entrenado
-
-model.save(os.path.join(config["paths"]["model_dir"], "condorview_model.h5"))
-
-print("Modelo entrenado y guardado correctamente.")
+# Mostrar resultados
+for i in range(len(images)):
+    predicted_class_index = np.argmax(predictions[i])
+    predicted_class = class_names[predicted_class_index]
+    confidence = predictions[i][predicted_class_index]
+    real_class = labels[i]
+    print(f"Clase real: {real_class} -> Predicción: {predicted_class} (confianza: {confidence:.2f})")

@@ -1,0 +1,6 @@
+# config/config.yaml
+
+data_path: data
+img_height: 224
+img_width: 224
+

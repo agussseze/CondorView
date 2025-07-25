@@ -1,50 +1,32 @@
+# preprocessing.py
 import os
-import yaml
 import cv2
 import numpy as np
-from glob import glob
+from sklearn.preprocessing import LabelEncoder
+from tensorflow.keras.utils import to_categorical
 
-def load_config(config_path='config.yaml'):
-    with open(config_path, 'r') as file:
-        config = yaml.safe_load(file)
-    return config
-
-def load_images_from_folder(folder_path, image_size):
-    image_paths = glob(os.path.join(folder_path, '*'))
+def load_images_from_folder(folder, img_height, img_width):
     images = []
-    for path in image_paths:
-        try:
-            img = cv2.imread(path)
-            img = cv2.resize(img, tuple(image_size))
-            images.append(img)
-        except Exception as e:
-            print(f"Error loading image {path}: {e}")
-    return np.array(images)
+    labels = []
+    class_names = os.listdir(folder)
+    for class_name in class_names:
+        class_folder = os.path.join(folder, class_name)
+        if not os.path.isdir(class_folder):
+            continue
+        for filename in os.listdir(class_folder):
+            img_path = os.path.join(class_folder, filename)
+            img = cv2.imread(img_path)
+            if img is not None:
+                img = cv2.resize(img, (img_width, img_height))
+                images.append(img)
+                labels.append(class_name)
+    return np.array(images), np.array(labels)
 
-def normalize_images(images):
-    return images.astype('float32') / 255.0
+def preprocess_images(images):
+    return images.astype("float32") / 255.0
 
-def save_preprocessed_data(images, output_path):
-    os.makedirs(output_path, exist_ok=True)
-    np.save(os.path.join(output_path, 'preprocessed_images.npy'), images)
-    print(f"Preprocessed data saved to {output_path}")
-
-def main():
-    config = load_config()
-
-    data_path = config['data']['raw_path']
-    output_path = config['data']['processed_path']
-    image_size = config['preprocessing']['image_size']
-
-    print(f"Loading images from {data_path}...")
-    images = load_images_from_folder(data_path, image_size)
-    print(f"{len(images)} images loaded.")
-
-    print("Normalizing images...")
-    images = normalize_images(images)
-
-    print("Saving preprocessed data...")
-    save_preprocessed_data(images, output_path)
-
-if __name__ == "__main__":
-    main()
+def encode_labels(labels):
+    le = LabelEncoder()
+    labels_encoded = le.fit_transform(labels)
+    labels_categorical = to_categorical(labels_encoded)
+    return labels_categorical, le.classes_
