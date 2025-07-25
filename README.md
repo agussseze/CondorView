@@ -57,6 +57,7 @@ Desarrollado por I+D Tec. Espacial
 ✉️ [tecesp.eu@gmail.com]
 Para mas informacion de los integrantes visitar nuestra landing page [https://tecesp.vercel.app/]
 ___________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________
-![WhatsApp Image 2025-06-27 at 13 37 42](https://github.com/user-attachments/assets/9be124cb-b86c-43a3-9e37-f8d55df9e071)
+
+![Sin título-1](https://github.com/user-attachments/assets/1628539f-ef1a-47e3-9e6f-19fd8d35a884)
 
 
