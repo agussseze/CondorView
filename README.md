@@ -53,12 +53,12 @@ En desarrollo: ya se completó la parte de configuración y preprocesamiento. Ac
 ___________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________
 
 Contacto
-Desarrollado por I+D Tec. Espacial
-✉️ [tecesp.eu@gmail.com]
+Mail [tecesp.eu@gmail.com]
 Para mas informacion de los integrantes visitar nuestra landing page [https://tecesp.vercel.app/]
 ___________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________
 
 ![Sin título-1](https://github.com/user-attachments/assets/1628539f-ef1a-47e3-9e6f-19fd8d35a884)
+Desarrollado por I+D Tec. Espacial
 
 
 
