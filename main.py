@@ -7,9 +7,9 @@ from tensorflow.keras.layers import Conv2D, MaxPooling2D, Flatten, Dense, Dropou
 from tensorflow.keras.utils import to_categorical
 from sklearn.model_selection import train_test_split
 
-# ============================
+
 # 1. Cargar configuración
-# ============================
+
 with open("config.yaml", "r") as file:
     config = yaml.safe_load(file)
 
